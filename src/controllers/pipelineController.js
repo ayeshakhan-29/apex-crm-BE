@@ -6,7 +6,7 @@ const { pool } = require('../config/database');
  */
 exports.getPipelineData = async (req, res) => {
     try {
-        const stages = ['New', 'Incoming', 'Contacted', 'Qualified', 'Proposal', 'Second Wing', 'Won', 'Lost'];
+        const stages = ['New', 'Incoming', 'Contacted', 'Qualified', 'Second Wing', 'Won', 'Lost'];
         
         // Fetch all leads
         const query = 'SELECT * FROM leads ORDER BY updated_at DESC';
@@ -67,7 +67,7 @@ exports.updateLeadStage = async (req, res) => {
         const { id } = req.params;
         const { stage } = req.body;
 
-        const validStages = ['New', 'Incoming', 'Contacted', 'Qualified', 'Proposal', 'Second Wing', 'Won', 'Lost'];
+        const validStages = ['New', 'Incoming', 'Contacted', 'Qualified', 'Second Wing', 'Won', 'Lost'];
         
         if (!validStages.includes(stage)) {
             return res.status(400).json({

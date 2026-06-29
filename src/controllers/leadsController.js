@@ -30,7 +30,6 @@ exports.createLead = async (req, res) => {
             'New Leads': 'New',
             'Contacted': 'Contacted',
             'Qualified': 'Qualified',
-            'Proposal': 'Proposal',
             'Negotiation': 'Second Wing',
             'Closed Won': 'Won',
             'Closed Lost': 'Lost'

@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS leads (
     name VARCHAR(255),
     phone VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(255),
-    stage ENUM('New', 'Incoming', 'Contacted', 'Qualified', 'Proposal', 'Second Wing', 'Won', 'Lost') DEFAULT 'New',
+    stage ENUM('New', 'Incoming', 'Contacted', 'Qualified', 'Second Wing', 'Won', 'Lost') DEFAULT 'New',
     source ENUM('WhatsApp', 'Facebook', 'Instagram', 'Website', 'Referral', 'Cold Call', 'Email', 'Social Media', 'Other') DEFAULT 'WhatsApp',
     last_message TEXT,
     last_message_at TIMESTAMP NULL,

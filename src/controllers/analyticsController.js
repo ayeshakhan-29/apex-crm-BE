@@ -53,9 +53,9 @@ exports.getConversionFunnel = async (req, res) => {
                 stage,
                 COUNT(*) as value
             FROM leads
-            WHERE stage IN ('New', 'Contacted', 'Qualified', 'Proposal', 'Won')
+            WHERE stage IN ('New', 'Contacted', 'Qualified', 'Second Wing', 'Won')
             GROUP BY stage
-            ORDER BY FIELD(stage, 'New', 'Contacted', 'Qualified', 'Proposal', 'Won')
+            ORDER BY FIELD(stage, 'New', 'Contacted', 'Qualified', 'Second Wing', 'Won')
         `;
 
         const [results] = await pool.query(query);
@@ -65,7 +65,7 @@ exports.getConversionFunnel = async (req, res) => {
             'New': 'New Leads',
             'Contacted': 'Contacted',
             'Qualified': 'Qualified',
-            'Proposal': 'Proposal',
+            'Second Wing': 'Second Wing',
             'Won': 'Closed Won'
         };
 
@@ -73,7 +73,7 @@ exports.getConversionFunnel = async (req, res) => {
             'New': '#64748b',
             'Contacted': '#3b82f6',
             'Qualified': '#10b981',
-            'Proposal': '#6366f1',
+            'Second Wing': '#f59e0b',
             'Won': '#059669'
         };
 
@@ -191,8 +191,7 @@ exports.getPipelineDistribution = async (req, res) => {
             'Incoming': '#94a3b8',
             'Contacted': '#3b82f6',
             'Qualified': '#10b981',
-            'Proposal': '#6366f1',
-            'Second Wing': '#8b5cf6',
+            'Second Wing': '#f59e0b',
             'Won': '#059669',
             'Lost': '#ef4444'
         };
@@ -281,9 +280,9 @@ async function getConversionFunnelData() {
             stage,
             COUNT(*) as value
         FROM leads
-        WHERE stage IN ('New', 'Contacted', 'Qualified', 'Proposal', 'Won')
+        WHERE stage IN ('New', 'Contacted', 'Qualified', 'Second Wing', 'Won')
         GROUP BY stage
-        ORDER BY FIELD(stage, 'New', 'Contacted', 'Qualified', 'Proposal', 'Won')
+        ORDER BY FIELD(stage, 'New', 'Contacted', 'Qualified', 'Second Wing', 'Won')
     `;
 
     const [results] = await pool.query(query);
@@ -292,7 +291,7 @@ async function getConversionFunnelData() {
         'New': 'New Leads',
         'Contacted': 'Contacted',
         'Qualified': 'Qualified',
-        'Proposal': 'Proposal',
+        'Second Wing': 'Second Wing',
         'Won': 'Closed Won'
     };
 
@@ -300,7 +299,7 @@ async function getConversionFunnelData() {
         'New': '#64748b',
         'Contacted': '#3b82f6',
         'Qualified': '#10b981',
-        'Proposal': '#6366f1',
+        'Second Wing': '#f59e0b',
         'Won': '#059669'
     };
 
@@ -377,8 +376,7 @@ async function getPipelineDistributionData() {
         'Incoming': '#94a3b8',
         'Contacted': '#3b82f6',
         'Qualified': '#10b981',
-        'Proposal': '#6366f1',
-        'Second Wing': '#8b5cf6',
+        'Second Wing': '#f59e0b',
         'Won': '#059669',
         'Lost': '#ef4444'
     };
