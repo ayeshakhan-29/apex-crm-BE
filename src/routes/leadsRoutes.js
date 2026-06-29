@@ -9,6 +9,9 @@ router.post('/leads', authMiddleware, leadsController.createLead);
 // Get all leads
 router.get('/leads', authMiddleware, leadsController.getLeads);
 
+// Delete multiple leads
+router.delete('/leads', authMiddleware, leadsController.deleteLeads);
+
 // Get a single lead by ID
 router.get('/leads/:id', authMiddleware, leadsController.getLeadById);
 

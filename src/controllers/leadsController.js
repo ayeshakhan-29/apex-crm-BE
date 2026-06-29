@@ -202,3 +202,45 @@ exports.deleteLead = async (req, res) => {
         });
     }
 };
+
+/**
+ * Delete multiple leads
+ */
+exports.deleteLeads = async (req, res) => {
+    try {
+        const { ids } = req.body;
+
+        if (!Array.isArray(ids) || ids.length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: 'Lead IDs are required'
+            });
+        }
+
+        const leadIds = [...new Set(ids.map(id => Number(id)).filter(Number.isInteger))];
+
+        if (leadIds.length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: 'Valid lead IDs are required'
+            });
+        }
+
+        const placeholders = leadIds.map(() => '?').join(', ');
+        const query = `DELETE FROM leads WHERE id IN (${placeholders})`;
+        const [result] = await pool.query(query, leadIds);
+
+        res.json({
+            success: true,
+            message: `${result.affectedRows} lead${result.affectedRows === 1 ? '' : 's'} deleted successfully`,
+            deletedCount: result.affectedRows
+        });
+    } catch (error) {
+        console.error('Error deleting leads:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to delete leads',
+            error: error.message
+        });
+    }
+};
